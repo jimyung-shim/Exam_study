@@ -40,45 +40,41 @@ int main()
 
 /* 	   2016		임의 개수의 정수를 입력하여, 오름차순 및 내림차순으로 정렬하는 프로그램을 작성하라.*/
 #include<stdio.h>
-#define NUMEL 1000
 int main()
 {
-	int arr[NUMEL];
-	int num;
-
+	int n;
 	printf("Enter the number of integers >> ");
-	scanf_s("%d", &num);
+	scanf_s("%d", &n);
 
 	printf("Enter integers >> ");
-	for (int a = 0; a < num; a++) {
-		scanf_s("%d", &arr[a]);
-	}
+	int arr[100] = { 0 };
+	for (int i = 0; i < n; i++)scanf_s("%d", &arr[i]);
 
-	int brr[NUMEL];
-	
-	for (int i = 0; i < num; i++) {			// 오름차순 배열 arr[] 정리
-		for (int j = 0; j < (num - 1); j++) {
-			if (arr[j] > arr[j + 1]) {
-				int temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
-			}
+	int i = 0;
+	int flag = 1;
+	while (1) {
+		if (arr[i] > arr[i + 1]) {
+			flag = 0;
+			int temp = arr[i];
+			arr[i] = arr[i + 1];
+			arr[i + 1] = temp;
 		}
+
+		if (flag && i == n - 2)break;
+
+		if (i == n - 2) {
+			i = 0;
+			flag = 1;
+			continue;
+		}
+		i++;
 	}
 
-	for (int i = 0; i < num; i++) {		// 내림차순 배열 brr[] 정리
-		brr[i] = arr[num - i - 1];
-	}
+	printf("Ascending: ");
+	for (int j = 0; j < n; j++)printf("%d ", arr[j]);
+	
+	printf("\nDescending: ");
+	for (int j = n - 1; j >= 0; j--)printf("%d ", arr[j]);
 
-	printf("Ascending: ");		// 오름차순 정렬
-	for (int i = 0; i < num; i++) {
-		printf("%d ", arr[i]);
-	}
-
-	printf("\nDescending: ");		// 내림차순 정렬
-	for (int i = 0; i < num; i++) {
-		printf("%d ", brr[i]);
-	}
 	return 0;
 }
-
