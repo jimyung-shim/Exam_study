@@ -1,0 +1,34 @@
+// 2023 응컴 기말 1번
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	while (1) {
+		printf("Enter an integer>> ");
+		char integer[10000];
+		scanf("%s", integer);
+
+		if (integer[0] == '0')return 0;
+
+		int n1 = integer[0] - '0', n2 = integer[1] - '0', judge = integer[2] - '0';
+
+		if (judge >= 5 && judge <= 9) {
+			n2++;
+			if (n2 >= 10) {
+				n2 = 0;
+				n1++;
+			}
+		}
+
+		int length = strlen(integer) - 1;;
+		if (n1 >= 10) {
+			length++;
+			n1 = n1 / 10;
+		}
+
+		printf("%d.%d*10^%d\n\n", n1, n2, length);
+	}
+	return 0;
+}
