@@ -32,3 +32,54 @@ int main()
 	}
 	return 0;
 }
+
+// 퀵소트
+
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+void quickSort(int arr[], int left, int right, int size) {
+    if (left >= right) return;
+
+    int pivot = arr[left], l = left + 1, r = right;
+
+    while (l <= r) {
+        if (arr[l] <= pivot) l++;
+        else if (arr[r] >= pivot) r--;
+        else {
+            int temp = arr[l];
+            arr[l++] = arr[r];
+            arr[r--] = temp;
+        }
+    }
+    int temp = arr[left];
+    arr[left] = arr[r];
+    arr[r] = temp;
+
+    printf("(%d,%d): ", left, right);
+    for (int i = 0; i < size; i++) printf("%d ", arr[i]);
+    printf("\n");
+
+    quickSort(arr, left, r - 1, size);
+    quickSort(arr, r + 1, right, size);
+}
+
+int main() {
+    while (1) {
+        int n;
+        printf("Enter the number of integers>> ");
+        scanf("%d", &n);
+        if (n == 0)return 0;
+
+        int arr[999];
+        printf("Enter %d integers>> ", n);
+        for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+
+        quickSort(arr, 0, n - 1, n);
+
+        printf("After sorting: ");
+        for (int i = 0; i < n; i++) printf("%d ", arr[i]);
+        printf("\n\n");
+    }
+    return 0;
+}
