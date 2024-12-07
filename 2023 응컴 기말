@@ -33,6 +33,71 @@ int main()
 	return 0;
 }
 
+// 연결리스트 삽입 정렬
+
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct node {
+	int data;
+	struct node* next;
+}node;
+
+node* tail;
+
+int main()
+{
+	while (1) {
+		tail = NULL;
+		int arr[999];
+		int i = 0;
+		printf("Enter integers>> ");
+
+		for (;;) {
+			scanf("%d", &arr[i]);
+			if (arr[i] < 0)break;
+			i++;
+		}
+
+		if (i == 0 && arr[0] < 0)return 0;
+
+		for (int j = 0; arr[j] > 0; j++) {
+			if (tail == NULL || tail->data >= arr[j]) {
+				node* newnode = (node*)malloc(sizeof(node));
+				newnode->data = arr[j];
+				newnode->next = tail;
+				tail = newnode;
+			}
+
+			else {
+				node* cur = tail;
+				node* pre = NULL;
+				while (cur != NULL && cur->data < arr[j]) {
+					pre = cur;
+					cur = cur->next;
+				}
+
+				node* newnode = (node*)malloc(sizeof(node));
+				newnode->data = arr[j];
+				newnode->next = cur;
+				if (pre != NULL)pre->next = newnode;
+			}
+
+			node* cur = tail;
+			while (cur != NULL) {
+				printf("%d ", cur->data);
+				cur = cur->next;
+			}
+			printf("\n");
+		}
+		printf("\n");
+	}
+	return 0;
+}
+
+
+
 // 퀵소트
 
 #define _CRT_SECURE_NO_WARNINGS
